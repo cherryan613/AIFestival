@@ -1,0 +1,615 @@
+/* 모바일 전용 - 메인 페이지 스타일 */
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/* 로고 섹션 */
+.logoSection {
+  display: flex;
+  height: 6vh;
+  justify-content: center;
+  align-items: center;
+  padding: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+}
+
+.logoImage {
+  height: 100%;
+  padding: 4px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+/* 게임 화면 섹션 */
+.gameScreenSection {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.gameScreen {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  aspect-ratio: 4/3;
+  background: #000;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  position: relative;
+}
+
+/* 맵 화면에서 오디오 자동재생 차단 시 표시되는 프롬프트 버튼 */
+/* removed unused .audioPrompt styles */
+
+.gameMapPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #666;
+  background: linear-gradient(45deg, #e0e0e0, #f5f5f5);
+}
+
+.gameMapContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+.gameMapImage {
+  width: 100%;
+  height: 100%;
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.player {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s ease;
+  z-index: 10;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.player.moving {
+  animation: bounce 0.2s ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.status {
+  margin-bottom: 4px;
+}
+
+.grassStatus {
+  color: #90EE90;
+  font-weight: bold;
+}
+
+/* 게임 화면 내 잡기 영역 반짝임 */
+.catchSparkle {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.catchSparkle::before,
+.catchSparkle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: sparkleRipple 2s infinite ease-out;
+}
+
+.catchSparkle::after {
+  animation-delay: 1s;
+}
+
+@keyframes sparkleRipple {
+  0% {
+    width: 10px;
+    height: 10px;
+    opacity: 0.8;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.8) 0%, rgba(255, 215, 0, 0) 70%);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+  }
+  100% {
+    width: 40px;
+    height: 40px;
+    opacity: 0;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0) 0%, rgba(255, 215, 0, 0) 70%);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0);
+  }
+}
+
+
+/* 컨트롤 섹션 - 모바일 전용 */
+.controlSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+  height: 30vh;
+  min-height: 120px;
+}
+
+.leftButtons, .rightButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.leftButtons {
+  align-items: flex-end;
+  margin-right: 16px;
+}
+
+.rightButtons {
+  align-items: flex-start;
+  margin-left: 16px;
+}
+
+/* 방향 조작 */
+.directionControl {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.joystickContainer {
+  position: relative;
+}
+
+.joystickBase {
+  width: 150px;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.joystickHandle {
+  width: 40%;
+  height: 40%;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  transition: transform 0.1s ease;
+  pointer-events: none;
+}
+
+.controlLabel {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 6px;
+}
+
+/* 액션 버튼들 */
+.actionButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+}
+
+.actionButton {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 8px;
+  width: 80px;
+  height: 50px;
+  padding: 10px 12px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  min-width: 55px;
+  white-space: nowrap;
+}
+
+.actionButton:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.actionButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* 팝업 모달 스타일 */
+.popUpModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.popUpModalContent {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  max-width: 80vw;
+  max-height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+.popUpModalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #eee;
+}
+
+.popUpModalHeader h3 {
+  margin: 0;
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.closeButton {
+  background: #ff6b6b;
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: #ff5252;
+  transform: scale(1.1);
+}
+
+/* 맵 모달 스타일 */
+
+.fullMapContainer {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 4/3;
+  border: 3px solid #333;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.fullMapImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.playerMarker {
+  position: absolute;
+  font-size: 16px;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.2); }
+}
+
+.viewportIndicator {
+  position: absolute;
+  border: 3px solid #4CAF50;
+  background: rgba(76, 175, 80, 0.2);
+  border-radius: 4px;
+  z-index: 15;
+  animation: borderGlow 2s infinite alternate;
+}
+
+@keyframes borderGlow {
+  0% { border-color: #4CAF50; box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); }
+  100% { border-color: #81C784; box-shadow: 0 0 15px rgba(76, 175, 80, 0.8); }
+}
+
+/* 잡기 활성화 영역 핀 표시 */
+.catchZone {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  pointer-events: none;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  animation: catchPinBounce 1.5s infinite;
+}
+
+.catchZone::before {
+  content: '⚡';
+}
+
+@keyframes catchPinBounce {
+  0%, 100% { 
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% { 
+    transform: translate(-50%, -55%) scale(1.1);
+  }
+}
+
+/* 도감 모달 스타일 */
+.dexContainer {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ----- 포켓몬 탭 모달 ----- */
+.pokemonTabs {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 1px;
+  padding: 6px 4px;
+}
+
+.pokemonTab {
+  padding: 8px 10px;
+  border-radius: 10px 10px 0 0;
+  background: #4b5563;
+  color: #fff;
+  font-weight: 300;
+  font-size: 10px;
+  border: 2px solid #374151;
+  border-bottom: none;
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,0.2);
+}
+
+.pokemonTab:hover {
+  filter: brightness(1.05);
+}
+
+.activePokemonTab {
+  font-size: 14px;
+  background: #e5e7eb;
+  color: #111827;
+  border-color: #9ca3af;
+}
+
+.pokemonContentBox {
+  position: relative;
+  justify-content: center;
+  width: 100%;
+  max-height: 60vh; /* 화면 안에서만 보이도록 */
+  padding: 0; /* 위아래 여백 제거 */
+  overflow: auto; /* 이미지가 커질 때 스크롤 */
+}
+
+.pokemonImage {
+  display: block; 
+  justify-content: center;
+  width: 100%;
+  height: auto;           /* 세로도 이미지에 맞게 */
+  max-height: 60vh;       /* 화면 안에서만 보이도록 */
+  object-fit: contain;    /* 비율 유지 */
+  background: transparent;
+  margin: 0 auto;         /* 가운데 정렬 */
+}
+
+.dexGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+  padding: 5px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.dexCard {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border: 2px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dexCard.silhouette {
+  background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+  border-color: #4b5563;
+  color: #9ca3af;
+}
+
+.dexCard.silhouette .cardContent {
+  filter: brightness(0.3);
+}
+
+.dexCard.cleared {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border-color: #10b981;
+  color: #065f46;
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.2);
+}
+
+.dexCard.cleared:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(16, 185, 129, 0.3);
+}
+
+.cardContent {
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.cardPokemon {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.cardSubtitle {
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 8px;
+  opacity: 0.8;
+}
+
+.cardDescription {
+  font-size: 10px;
+  line-height: 1.4;
+  opacity: 0.7;
+}
+
+.dexCard.silhouette .cardTitle,
+.dexCard.silhouette .cardSubtitle,
+.dexCard.silhouette .cardDescription {
+  color: #6b7280;
+}
+
+.dexProgress {
+  text-align: center;
+  padding: 15px;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-radius: 8px;
+  border: 2px solid #0ea5e9;
+}
+
+.dexProgress p {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: #0c4a6e;
+}
+
+.progressBar {
+  width: 100%;
+  height: 16px;
+  background: #e0f2fe;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid #0ea5e9;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #0ea5e9 0%, #0284c7 100%);
+  border-radius: 8px;
+  transition: width 0.5s ease;
+  position: relative;
+}
+
+.progressFill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  animation: progressShine 2s infinite;
+}
+
+@keyframes progressShine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}

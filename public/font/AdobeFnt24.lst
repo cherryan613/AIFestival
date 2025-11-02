@@ -1,0 +1,30 @@
+%!Adobe-FontList 1.24
+%Locale:0x412
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:NeoDunggeunmo-Regular
+FamilyName:NeoDunggeunmo
+StyleName:Regular
+FullName:NeoDunggeunmo
+MenuName:Neo둥근모
+StyleBits:0
+FamilyNameNative:Neo둥근모
+StyleNameNative:보통
+FullNameNative:Neo둥근모
+WritingScript:Korean
+OutlineFileName:C:\Users\lian0\Desktop\EWHA_2271096\학생회\2025 AIM\인지상정\전야행사\ai_festival\public\Font\neodgm.ttf
+DataFormat:sfntData
+hasSVG:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:651044
+FileModTime:1761146325
+WeightClass:400
+WidthClass:5
+AngleClass:0
+NameArray:0,Win,1,NeoDunggeunmo
+NameArray:3,Win,1,Neo둥근모
+%EndFont
+
