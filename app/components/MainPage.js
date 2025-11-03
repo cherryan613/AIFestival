@@ -27,6 +27,11 @@ const MainPage = ({ onEnterGame }) => {
   const [isGetPokemonMode, setIsGetPokemonMode] = useState(false); // 포획 화면 전환 상태
   // 맵 BGM
   const mapAudioRef = useRef(null);
+  useEffect(() => {
+    if (mapAudioRef.current) {
+      mapAudioRef.current.play().catch(() => {});
+    }
+  }, []);
   
   // 조이스틱 상태
   const [joystickPosition, setJoystickPosition] = useState({ x: 0, y: 0 });
