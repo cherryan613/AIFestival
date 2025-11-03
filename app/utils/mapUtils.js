@@ -78,7 +78,7 @@ const grassAreas = [
 
   
   { x: 24, y: 45, width: 8, height: 6 },
-  { x: 20, y: 52, width: 14, height: 13 },
+  { x: 20, y: 51, width: 14, height: 13 },
 
   { x: 44, y: 24, width: 7, height: 10 },
   { x: 52, y: 30, width: 6, height: 3 },
@@ -88,7 +88,7 @@ const grassAreas = [
   { x: 65, y: 28, width: 7, height: 4 },
 
   { x: 48, y: 50 , width: 11, height: 7 },
-  { x: 60, y: 52 , width: 3, height: 3 }
+  { x: 60, y: 51 , width: 3, height: 3 }
   
 ];
 
