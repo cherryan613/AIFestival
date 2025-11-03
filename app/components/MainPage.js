@@ -174,7 +174,7 @@ const MainPage = ({ onEnterGame }) => {
     }
   };
 
-  // 연속 이동을 위한 useEffect
+  // 연속 이동을 위한 useEffect (부드러운 움직임)
   useEffect(() => {
     if (!isDragging || (currentDirection.x === 0 && currentDirection.y === 0)) {
       if (moveIntervalRef.current) {
@@ -277,10 +277,12 @@ const MainPage = ({ onEnterGame }) => {
 
   useEffect(() => {
     if (isDragging) {
-      document.addEventListener('mousemove', handleJoystickMove);
+      // passive: false로 설정해 터치 이벤트가 더 반응적이게
+      document.addEventListener('mousemove', handleJoystickMove, { passive: false });
       document.addEventListener('mouseup', handleJoystickEnd);
-      document.addEventListener('touchmove', handleJoystickMove);
+      document.addEventListener('touchmove', handleJoystickMove, { passive: false });
       document.addEventListener('touchend', handleJoystickEnd);
+      document.addEventListener('touchcancel', handleJoystickEnd);
     }
 
     return () => {
@@ -288,6 +290,7 @@ const MainPage = ({ onEnterGame }) => {
       document.removeEventListener('mouseup', handleJoystickEnd);
       document.removeEventListener('touchmove', handleJoystickMove);
       document.removeEventListener('touchend', handleJoystickEnd);
+      document.removeEventListener('touchcancel', handleJoystickEnd);
     };
   }, [isDragging]);
 
