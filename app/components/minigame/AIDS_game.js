@@ -72,7 +72,7 @@ const AIDSGame = ({ isOpen, onClose }) => {
     <div className={styles.overlay}>
       <div className={styles.gameWindow}>
         <div className={styles.header}>
-          <h3>사다리타기 게임</h3>
+          <h2>🫧 • 사다리타기 게임</h2>
           <button className={styles.closeButton} onClick={() => onClose(false)}>
             ✕
           </button>

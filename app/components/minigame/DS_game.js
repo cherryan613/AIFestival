@@ -114,7 +114,7 @@ const DSGame = ({ isOpen, onClose }) => {
     <div className={styles.overlay}>
       <div className={styles.gameWindow}>
         <div className={styles.header}>
-          <h2>틀린 글자 찾기</h2>
+          <h2>👀 • 틀린 글자 찾기</h2>
           <button className={styles.closeButton} onClick={() => onClose(false)}>
             ✕
           </button>

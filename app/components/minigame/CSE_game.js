@@ -157,7 +157,7 @@ const CSEGame = ({ isOpen, onClose }) => {
     <div className={styles.overlay}>
       <div className={styles.gameWindow}>
         <div className={styles.header}>
-          <h2>회로 연결하기</h2>
+          <h2>✨ • 회로 연결하기</h2>
           <button className={styles.closeButton} onClick={() => onClose(false)}>
             ✕
           </button>

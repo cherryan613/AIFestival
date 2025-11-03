@@ -100,7 +100,7 @@ const CSGame = ({ isOpen, onClose }) => {
     <div className={styles.overlay}>
       <div className={styles.gameWindow}>
         <div className={styles.header}>
-          <h2>시저 암호 해독기</h2>
+          <h2>⛓️ • 시저 암호 해독기</h2>
           <button className={styles.closeButton} onClick={() => onClose(false)}>
             ✕
           </button>
