@@ -5,19 +5,26 @@ import styles from '../../style/MiniGame.module.css';
 
 const AIDSGame = ({ isOpen, onClose }) => {
   const [attempts, setAttempts] = useState(5);
-  const [ladderOpacity, setLadderOpacity] = useState(100);
-  const [gameResult, setGameResult] = useState(null);
+  const [isCorrect, setIsCorrect] = useState(null);
   const [selectedChoice, setSelectedChoice] = useState(null);
   const [showResult, setShowResult] = useState(false);
-  const [correctAnswer] = useState(Math.floor(Math.random() * 3)); // 0: 인지, 1: 데사, 2: 인데부
 
-  const choices = ['인지', '데사', '인데부'];
-  const results = ['AIDS 예방법', 'AIDS 치료법', 'AIDS 상식'];
+  const choices = ['A', 'B', 'C'];
+  const [results, setResults] = useState([]);
+  const [mapping, setMapping] = useState([0, 1, 2]); // 사다리타기 매핑
+
+  useEffect(() => {
+    const arr = ['인데부', '인지', '데사'];
+    const shuffled = arr.sort(() => Math.random() - 0.5);
+    setResults(shuffled);
+    // 사다리타기 매핑: [0,1,2]을 랜덤하게 섞음
+    const ladder = [0, 1, 2].sort(() => Math.random() - 0.5);
+    setMapping(ladder);
+  }, [isOpen]);
 
   const resetGame = () => {
     setAttempts(5);
-    setLadderOpacity(100);
-    setGameResult(null);
+    setIsCorrect(null);
     setSelectedChoice(null);
     setShowResult(false);
   };
@@ -30,38 +37,32 @@ const AIDSGame = ({ isOpen, onClose }) => {
 
   // 성공/실패 결정 시 자동 종료로 전환 (돌아가기 버튼 없이)
   useEffect(() => {
-    if (gameResult === 'success') {
+    if (isCorrect === true) {
       const t = setTimeout(() => onClose(true), 1000);
       return () => clearTimeout(t);
     }
-    if (gameResult === 'failed') {
+    if (isCorrect === false) {
       const t = setTimeout(() => onClose(false), 1000);
       return () => clearTimeout(t);
     }
-  }, [gameResult]);
+  }, [isCorrect]);
 
   const handleChoiceClick = (choiceIndex) => {
-    if (attempts <= 0 || gameResult) return;
+    if (attempts <= 0 || isCorrect) return;
 
     setSelectedChoice(choiceIndex);
     setShowResult(true);
 
-    if (choiceIndex === correctAnswer) {
-      setGameResult('success');
+    // 사다리타기 매핑에 따라 결과 결정
+    const resultIdx = mapping[choiceIndex];
+    if (results[resultIdx] === '인데부') {
+      setIsCorrect(true);
     } else {
-      const newAttempts = attempts - 1;
-      setAttempts(newAttempts);
-      
-      if (newAttempts > 0) {
-        // 틀렸을 때 사다리 투명도 10% 감소
-        setLadderOpacity(prev => Math.max(0, prev - 10));
-        setTimeout(() => {
-          setShowResult(false);
-          setSelectedChoice(null);
-        }, 2000);
-      } else {
-        setGameResult('failed');
-      }
+      setIsCorrect(false);
+      setTimeout(() => {
+        setShowResult(false);
+        onClose(false);
+      }, 1000);
     }
   };
 
@@ -71,48 +72,40 @@ const AIDSGame = ({ isOpen, onClose }) => {
     <div className={styles.overlay}>
       <div className={styles.gameWindow}>
         <div className={styles.header}>
-          <h2>AIDS 사다리타기 게임</h2>
+          <h3>사다리타기 게임</h3>
           <button className={styles.closeButton} onClick={() => onClose(false)}>
             ✕
           </button>
         </div>
         <div className={styles.content}>
-          <div className={styles.gameInfo}>
-            <p>남은 기회: {attempts}번</p>
-            <p>올바른 선택지를 골라보세요!</p>
-          </div>
-
           <div className={styles.ladderGame}>
             {/* 선택지 */}
             <div className={styles.choices}>
               {choices.map((choice, index) => (
                 <button
                   key={index}
-                  className={`${styles.choiceButton} ${
-                    selectedChoice === index ? styles.selected : ''
-                  }`}
+                  className={`${styles.choiceButton} ${selectedChoice === index ? styles.selected : ''}`}
                   onClick={() => handleChoiceClick(index)}
-                  disabled={attempts <= 0 || gameResult}
+                  disabled={attempts <= 0 || isCorrect}
                 >
                   {choice}
                 </button>
               ))}
             </div>
 
-            {/* 사다리 (투명도 조절) */}
-            <div className={styles.ladder}>
-              <div 
-                className={styles.ladderLines}
-                style={{ opacity: ladderOpacity / 100 }}
-              >
-                <div className={styles.verticalLine}></div>
-                <div className={styles.verticalLine}></div>
-                <div className={styles.verticalLine}></div>
-                <div className={styles.horizontalLine} style={{ top: '20%', left: '0%', width: '50%' }}></div>
-                <div className={styles.horizontalLine} style={{ top: '40%', left: '50%', width: '50%' }}></div>
-                <div className={styles.horizontalLine} style={{ top: '60%', left: '0%', width: '50%' }}></div>
-                <div className={styles.horizontalLine} style={{ top: '80%', left: '50%', width: '50%' }}></div>
-              </div>
+            {/* 가운데 네모 칸 */}
+            <div
+              style={{
+                width: '100%',
+                height: '150px',
+                background: '#e0f2fe',
+                borderRadius: '12px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <span style={{ fontSize: '40px', color: '#0c4a6e', fontWeight: 'bold' }}>?</span>
             </div>
 
             {/* 결과 */}
@@ -121,9 +114,9 @@ const AIDSGame = ({ isOpen, onClose }) => {
                 <div
                   key={index}
                   className={`${styles.resultBox} ${
-                    showResult && selectedChoice !== null && index === correctAnswer 
-                      ? styles.correctResult 
-                      : showResult && selectedChoice === index && index !== correctAnswer
+                    showResult && selectedChoice !== null && mapping[selectedChoice] === index && result === '인데부'
+                      ? styles.correctResult
+                      : showResult && selectedChoice !== null && mapping[selectedChoice] === index && result !== '인데부'
                       ? styles.wrongResult
                       : ''
                   }`}
@@ -134,20 +127,21 @@ const AIDSGame = ({ isOpen, onClose }) => {
             </div>
           </div>
 
-          {/* 게임 결과 메시지 */}
-          {gameResult === 'success' && (
-            <div className={styles.gameMessage}>
-              <h3>🎉 정답입니다!</h3>
-              <p>AIDS에 대한 올바른 정보를 얻었습니다!</p>
-              {/* 자동으로 닫힘 */}
-            </div>
-          )}
-
-          {gameResult === 'failed' && (
-            <div className={styles.gameMessage}>
-              <h3>😅 기회를 모두 사용했습니다!</h3>
-              <p>정답은 &ldquo;{choices[correctAnswer]}&rdquo;였습니다.</p>
-              {/* 자동으로 닫힘 */}
+          {/* 결과 메시지 */}
+          {showResult && (
+            <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 8 }}>
+              <div>
+                {!isCorrect && (
+                  <div>
+                    <p>오답! 잉데쀼가 도망쳤습니다. </p>
+                  </div>
+                )}
+                {isCorrect && (
+                  <div>
+                    <p>잉데쀼 획득 완료!</p>
+                  </div>
+                )}
+              </div>
             </div>
           )}
         </div>

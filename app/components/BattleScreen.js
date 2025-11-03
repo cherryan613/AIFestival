@@ -9,7 +9,6 @@ import CSEGame from './minigame/CSE_game';
 import AIGame from './minigame/AI_game';
 import AIDSGame from './minigame/AIDS_game';
 
-
 // battleType: 1=AI, 2=DS, 3=CS, 4=CSE, 5=AIDS
 const BattleScreen = ({ clearedGames, setClearedGames, onBack, onOpenDex, battleType = 1, onCleared }) => {
   const [currentMiniGame, setCurrentMiniGame] = useState(null);
