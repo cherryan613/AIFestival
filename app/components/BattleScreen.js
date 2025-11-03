@@ -129,12 +129,6 @@ const BattleScreen = ({ clearedGames, setClearedGames, onBack, onOpenDex, battle
             </button>
             <button 
               className={styles.battleSubBtn}
-              onClick={() => alert('포켓몬 설명을 확인합니다!')}
-            >
-              포켓몬 설명
-            </button>
-            <button 
-              className={styles.battleSubBtn}
               onClick={onBack}
             >
               도망간다
