@@ -293,3 +293,69 @@
   width: 100%;
   min-height: 44px; /* 버튼 자체 높이 축소 */
 }
+
+/* 공략방법 모달 */
+.strategyModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 90%;
+  height: 90%;
+  padding: 5%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.strategyContent {
+  position: relative;
+  width: 90%;
+  max-width: 700px;
+  height: auto;
+  max-height: 85vh;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 10px;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeButton {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #333;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 10;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.closeButton:active {
+  transform: scale(0.95);
+}
+
+.strategyImage {
+  width: 100%;
+  height: auto;
+  max-height: calc(85vh - 30px);
+  object-fit: contain;
+  border-radius: 8px;
+}

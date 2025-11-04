@@ -12,6 +12,7 @@ import AIDSGame from './minigame/AIDS_game';
 // battleType: 1=AI, 2=DS, 3=CS, 4=CSE, 5=AIDS
 const BattleScreen = ({ clearedGames, setClearedGames, onBack, onOpenDex, battleType = 1, onCleared }) => {
   const [currentMiniGame, setCurrentMiniGame] = useState(null);
+  const [showStrategy, setShowStrategy] = useState(false);
   const audioRef = useRef(null);
 
   // 배틀 BGM: 배틀 화면에 진입하면 재생, 이 화면을 벗어나면 정지
@@ -72,6 +73,28 @@ const BattleScreen = ({ clearedGames, setClearedGames, onBack, onOpenDex, battle
     onBack();
   };
 
+  // 공략방법 보여주기
+  const handleShowStrategy = () => {
+    setShowStrategy(true);
+  };
+
+  // 공략방법 닫기
+  const handleCloseStrategy = () => {
+    setShowStrategy(false);
+  };
+
+  // 각 포켓몬에 맞는 공략 이미지 경로
+  const getStrategyImage = () => {
+    switch(battleType) {
+      case 1: return "/game/잉쥐-공략.png";
+      case 2: return "/game/데이리-공략.png";
+      case 3: return "/game/시큐-공략.png";
+      case 4: return "/game/코코모-공략.png";
+      case 5: return "/game/잉데쀼-공략.png";
+      default: return "/game/잉쥐-공략.png";
+    }
+  };
+
   return (
     <div className={styles.battleContainer}>
       {/* 상단 로고 */}
@@ -119,11 +142,10 @@ const BattleScreen = ({ clearedGames, setClearedGames, onBack, onOpenDex, battle
             </button>
           </div>
           
-          {/* 하단의 3개 버튼 */}
           <div className={styles.battleSubButtons}>
             <button 
               className={styles.battleSubBtn}
-              onClick={() => alert('공략 방법을 확인합니다!')}
+              onClick={handleShowStrategy}
             >
               공략 방법
             </button>
@@ -143,6 +165,24 @@ const BattleScreen = ({ clearedGames, setClearedGames, onBack, onOpenDex, battle
       <CSGame isOpen={currentMiniGame === 3} onClose={closeMiniGame} />
       <CSEGame isOpen={currentMiniGame === 4} onClose={closeMiniGame} />
       <AIDSGame isOpen={currentMiniGame === 5} onClose={closeMiniGame} />
+
+      {/* 공략방법 모달 */}
+      {showStrategy && (
+        <div className={styles.strategyModal} onClick={handleCloseStrategy}>
+          <div className={styles.strategyContent} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.closeButton} onClick={handleCloseStrategy}>
+              ✕
+            </button>
+            <Image 
+              src={getStrategyImage()}
+              alt="공략방법"
+              width={800}
+              height={600}
+              className={styles.strategyImage}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
