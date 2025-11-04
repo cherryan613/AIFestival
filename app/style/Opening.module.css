@@ -1,0 +1,250 @@
+/* Opening 화면 전용 스타일 */
+.fullScreenContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/* 로고 섹션 */
+.logoSection {
+  display: flex;
+  height: 6vh;
+  justify-content: center;
+  align-items: center;
+  padding: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+}
+
+.logoImage {
+  height: 100%;
+  padding: 4px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+/* 게임 화면 섹션 */
+.openingScreenSection {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.openingScreen {
+  position: relative;
+  aspect-ratio: 3/4;
+  max-width: calc(94vh * 3 / 4);
+  max-height: 94vh;
+  width: 100%;
+  background: transparent;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.openingImageContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background: transparent;
+}
+
+.openingImage {
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* 페이드 인/아웃 애니메이션 */
+.fadeIn {
+  animation: fadeIn 0.5s ease-in forwards;
+}
+
+.fadeOut {
+  animation: fadeOut 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* 눈 깜빡임 오버레이 */
+.blinkOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: eyeBlink 2s ease-in-out forwards;
+}
+
+.eyeContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.eye {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(100, 100, 100, 0.3) 0%, rgba(0, 0, 0, 1) 70%);
+  border-radius: 50%;
+  animation: eyeOpen 2s ease-in-out forwards;
+}
+
+@keyframes eyeBlink {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes eyeOpen {
+  0% {
+    transform: scaleY(0.05);
+    opacity: 1;
+  }
+  8% {
+    transform: scaleY(1);
+    opacity: 0.8;
+  }
+  16% {
+    transform: scaleY(0.05);
+  }
+  24% {
+    transform: scaleY(1);
+    opacity: 0.7;
+  }
+  32% {
+    transform: scaleY(0.05);
+  }
+  40% {
+    transform: scaleY(1);
+    opacity: 0.6;
+  }
+  48% {
+    transform: scaleY(0.05);
+  }
+  60% {
+    transform: scaleY(1);
+    opacity: 0.4;
+  }
+  85% {
+    transform: scaleY(1);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 0;
+  }
+}
+
+/* 암전 오버레이 */
+.blackoutOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: 999;
+  animation: blackoutFade 7s ease-in-out forwards;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.blackoutImageContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.blackoutImage {
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+@keyframes blackoutFade {
+  0% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.openingIndicator {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 100;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.activeIndicator {
+  background: rgba(255, 255, 255, 0.9);
+  transform: scale(1.3);
+}
