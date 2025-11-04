@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import styles from '../style/Opening.module.css';
+import styles from '../style/Ending.module.css';
 
 const Ending = ({ onRestart, clearedGames }) => {
   const [currentScene, setCurrentScene] = useState(0); // 0: 엔딩1, 1: 엔딩2, 2: 버튼, 3: 도감
@@ -51,17 +51,17 @@ const Ending = ({ onRestart, clearedGames }) => {
         />
       </div>
       
-      {/* Ending 화면 영역 - 3:4 비율 */}
-      <div className={styles.openingScreenSection}>
-        <div className={styles.openingScreen}>
+      {/* Ending 화면 영역 */}
+      <div className={styles.endingScreenSection}>
+        <div className={styles.endingScreen}>
           {/* 엔딩 이미지 */}
           {currentScene < 2 && (
-            <div className={`${styles.openingImageContainer} ${showScene ? styles.fadeIn : styles.fadeOut}`}>
+            <div className={`${styles.endingImageContainer} ${showScene ? styles.fadeIn : styles.fadeOut}`}>
               <Image 
                 src={`/ending/엔딩_${currentScene + 1}.png`}
                 alt={`Ending Scene ${currentScene + 1}`}
                 fill
-                className={styles.openingImage}
+                className={styles.endingImage}
                 priority
               />
             </div>
@@ -161,6 +161,17 @@ const Ending = ({ onRestart, clearedGames }) => {
           )}
         </div>
       </div>
+      
+      {/* 흰색 박스 밖, 아래에 추가할 내용 - 여기에 글씨나 버튼 추가 가능 */}
+      {showDex && (
+        <div className={styles.belowBoxContent}>
+          <p>이 장면을 캡쳐하여 보관해주세요!</p>   
+          <p>도장판 이벤트에 사용됩니다.</p>
+          <button className={styles.dexButton} onClick={onRestart}>
+            다시 시작
+          </button>
+        </div>
+      )}
     </div>
   );
 };
