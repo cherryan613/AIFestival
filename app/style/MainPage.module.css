@@ -122,8 +122,8 @@
 /* 게임 화면 내 잡기 영역 반짝임 */
 .catchSparkle {
   position: absolute;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   transform: translate(-50%, -50%);
   pointer-events: none;
   z-index: 5;
@@ -139,27 +139,34 @@
   height: 100%;
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  animation: sparkleRipple 2s infinite ease-out;
+  animation: sparkleRipple 1.5s infinite ease-out;
 }
 
 .catchSparkle::after {
-  animation-delay: 1s;
+  animation-delay: 0.75s;
 }
 
 @keyframes sparkleRipple {
   0% {
-    width: 10px;
-    height: 10px;
-    opacity: 0.8;
-    background: radial-gradient(circle, rgba(255, 215, 0, 0.8) 0%, rgba(255, 215, 0, 0) 70%);
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    width: 20px;
+    height: 20px;
+    opacity: 1;
+    background: radial-gradient(circle, rgba(255, 215, 0, 1) 0%, rgba(255, 165, 0, 0.8) 40%, rgba(255, 215, 0, 0) 70%);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 1), 0 0 40px rgba(255, 165, 0, 0.8);
   }
-  100% {
+  50% {
     width: 40px;
     height: 40px;
+    opacity: 0.8;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.9) 0%, rgba(255, 165, 0, 0.6) 40%, rgba(255, 215, 0, 0) 70%);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.9), 0 0 50px rgba(255, 165, 0, 0.6);
+  }
+  100% {
+    width: 60px;
+    height: 60px;
     opacity: 0;
     background: radial-gradient(circle, rgba(255, 215, 0, 0) 0%, rgba(255, 215, 0, 0) 70%);
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0);
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0);
   }
 }
 
