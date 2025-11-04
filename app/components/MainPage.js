@@ -7,7 +7,7 @@ import styles from '../style/MainPage.module.css';
 import BattleScreen from './BattleScreen';
 import GetPokemon from './GetPokemon';
 
-const MainPage = ({ onEnterGame }) => {
+const MainPage = ({ onEnterGame, onGameComplete }) => {
   // 게임 상태
   const [playerPosition, setPlayerPosition] = useState({ x: 625, y: 770 }); // 시작 위치 변경 (가로 중앙, 세로 하단 20%)
   const [cameraOffset, setCameraOffset] = useState({ x: 0, y: 0 }); // 기본 카메라 오프셋
@@ -390,7 +390,13 @@ const MainPage = ({ onEnterGame }) => {
       <>
         <GetPokemon
           battleType={battleType}
-          onBack={() => setIsGetPokemonMode(false)}
+          onBack={() => {
+            setIsGetPokemonMode(false);
+            // 모든 게임 클리어 확인 (5개 클리어 시 엔딩으로)
+            if (clearedGames.size >= 5 && onGameComplete) {
+              onGameComplete();
+            }
+          }}
           onOpenDex={openDexModal}
           clearedGames={clearedGames}
         />

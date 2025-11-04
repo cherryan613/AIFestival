@@ -248,3 +248,140 @@
   background: rgba(255, 255, 255, 0.9);
   transform: scale(1.3);
 }
+
+/* Ending 버튼 컨테이너 */
+.endingButtonContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 20px;
+}
+
+.endingTitle {
+  font-size: 36px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  margin: 0;
+  text-align: center;
+}
+
+.endingSubtitle {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  text-align: center;
+}
+
+.dexButton {
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  border-radius: 8px;
+  padding: 9px 20px;
+  font-size: 15px;
+  font-weight: normal;
+  color: #000000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dexButton:hover {
+  background: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.dexButton:active {
+  transform: translateY(0);
+}
+
+/* 최종 도감 컨테이너 */
+.finalDexContainer {
+  width: 90%;
+  height: 90%;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  padding: 5%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dexHeader {
+  text-align: center;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  margin-bottom: 5px;
+  flex-shrink: 0;
+}
+
+.dexHeader h3 {
+  margin: 0;
+  color: #0c4a6e;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.dexGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.dexCard {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border: 2px solid #10b981;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 3px 10px rgba(16, 185, 129, 0.2);
+  min-height: 0;
+}
+
+.cardContent {
+  text-align: center;
+  width: 100%;
+}
+
+.cardPokemon {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 8px;
+}
+
+.cardSubtitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: #065f46;
+  margin-top: 3px;
+}
+
+.closeButton {
+  background: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 25px;
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 8px;
+  flex-shrink: 0;
+}
+
+.closeButton:active {
+  transform: translateY(0);
+}
