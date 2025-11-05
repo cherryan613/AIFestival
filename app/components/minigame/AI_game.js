@@ -5,11 +5,12 @@ import styles from '../../style/MiniGame.module.css';
 
 // 이미지 데이터 매칭 리스트
 const IMAGE_DATA = [
-  { id: 1, name: '강아지', original: '/AI_game/dog_original.jpg', mosaic: '/AI_game/dog_mosaic.jpg' },
-  { id: 2, name: '고양이', original: '/AI_game/cat_original.jpg', mosaic: '/AI_game/cat_mosaic.jpg' },
-  { id: 3, name: '기린', original: '/AI_game/giraff_original.jpg', mosaic: '/AI_game/giraff_mosaic.jpg' },
-  { id: 4, name: '사자', original: '/AI_game/lion_original.jpg', mosaic: '/AI_game/lion_mosaic.jpg' },
-  { id: 5, name: '새', original: '/AI_game/bird_original.jpg', mosaic: '/AI_game/bird_mosaic.jpg' },
+  { id: 1, name: '이아이', mosaic: '/AI_game/이아이_모자이크.png' },
+  { id: 2, name: '잉쥐', mosaic: '/AI_game/잉쥐_모자이크.png' },
+  { id: 3, name: '데이리', mosaic: '/AI_game/데이리_모자이크.png' },
+  { id: 4, name: '시큐', mosaic: '/AI_game/시큐_모자이크.png' },
+  { id: 5, name: '코코모', mosaic: '/AI_game/코코모_모자이크.png' },
+  { id: 6, name: '잉데쀼', mosaic: '/AI_game/잉데쀼_모자이크.png' },
 ];
 
 const AIGame = ({ isOpen, onClose }) => {
@@ -23,7 +24,7 @@ const AIGame = ({ isOpen, onClose }) => {
   // 랜덤 문제 생성
   const generateQuestion = () => {
     setShowOriginal(false); // 처음엔 모자이크만 보여주기
-    // 5개 중 랜덤으로 정답 선택
+    // 6개 중 랜덤으로 정답 선택
     const correctAnswer = IMAGE_DATA[Math.floor(Math.random() * IMAGE_DATA.length)];
     
     // 정답 외의 오답 2개 선택
@@ -89,22 +90,12 @@ const AIGame = ({ isOpen, onClose }) => {
         <div className={styles.content}>
           {currentQuestion && (
             <div className={styles.aiGameQuestion}>
-              {/* 모자이크 이미지 또는 원본 이미지 */}
+              {/* 모자이크 이미지 */}
               <div className={styles.aiGameImageBox}>
                 <img 
                   src={currentQuestion.mosaic} 
                   alt="모자이크 이미지" 
                   className={styles.aiGameMosaicImg}
-                  style={{ position: 'relative', zIndex: 1 }}
-                />
-                <img 
-                  src={currentQuestion.original} 
-                  alt="원본 이미지" 
-                  className={styles.aiGameOriginalImg}
-                  style={{
-                    opacity: showOriginal ? 1 : 0,
-                    zIndex: 2
-                  }}
                 />
               </div>
 
