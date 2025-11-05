@@ -8,7 +8,7 @@ const TEXT_DATA = [
   { id: 2, plaintext: 'vdxjggzbz', ciphertext: 'aicollege' },
   { id: 3, plaintext: 'xpatngboxklbmr', ciphertext: 'ewhauniversity' },
   { id: 4, plaintext: 'qmpsfgsqifwhm', ciphertext: 'cybersecurity' },
-  { id: 5, plaintext: 'trvjri', ciphertext: 'caesar' },
+  { id: 5, plaintext: 'yjbbfxam', ciphertext: 'password' },
 ];
 
 const CSGame = ({ isOpen, onClose }) => {
