@@ -82,7 +82,7 @@ const AIGame = ({ isOpen, onClose }) => {
     <div className={styles.overlay}>
       <div className={styles.gameWindow}>
         <div className={styles.header}>
-          <h2>💫 • AI 이미지 맞히기</h2>
+          <h2>💫 • 원본 이미지 찾기</h2>
           <button className={styles.closeButton} onClick={() => onClose(false)}>
             ✕
           </button>
